@@ -1,4 +1,4 @@
-console.log('Script loaded - version 6');
+console.log('Script loaded - version 7');
 
 const card = document.getElementById('card');
 let isFlipped = false;
@@ -186,8 +186,17 @@ card.addEventListener('contextmenu', (e) => {
 });
 
 // Control buttons
-document.getElementById('flipBtn').addEventListener('click', () => {
+const flipBtn = document.getElementById('flipBtn');
+console.log('Flip button found:', flipBtn);
+
+flipBtn.addEventListener('click', () => {
     console.log('Flip button clicked');
+    flipCard();
+});
+
+flipBtn.addEventListener('touchstart', (e) => {
+    e.preventDefault();
+    console.log('Flip button touched');
     flipCard();
 });
 
@@ -200,14 +209,38 @@ document.getElementById('resetBtn').addEventListener('click', () => {
     if (isFlipped) flipCard(); // Reset to front if flipped
 });
 
+document.getElementById('resetBtn').addEventListener('touchstart', (e) => {
+    e.preventDefault();
+    console.log('Reset button touched');
+    currentRotation = 0;
+    tiltX = 0;
+    tiltY = 0;
+    updateCardTransform();
+    if (isFlipped) flipCard();
+});
+
 document.getElementById('rotateLeftBtn').addEventListener('click', () => {
     console.log('Rotate left button clicked');
     currentRotation -= 90;
     updateCardTransform();
 });
 
+document.getElementById('rotateLeftBtn').addEventListener('touchstart', (e) => {
+    e.preventDefault();
+    console.log('Rotate left button touched');
+    currentRotation -= 90;
+    updateCardTransform();
+});
+
 document.getElementById('rotateRightBtn').addEventListener('click', () => {
     console.log('Rotate right button clicked');
+    currentRotation += 90;
+    updateCardTransform();
+});
+
+document.getElementById('rotateRightBtn').addEventListener('touchstart', (e) => {
+    e.preventDefault();
+    console.log('Rotate right button touched');
     currentRotation += 90;
     updateCardTransform();
 });
