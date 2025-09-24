@@ -16,6 +16,7 @@ body {
     width: 327px;
     height: 512px;
     margin: 20px auto;
+    position: relative;
 }
 
 .card {
@@ -85,19 +86,19 @@ body {
     100% { background-position: 0% 0%; }
 }
 
-/* Thickness effect - coin-like */
-.card::after {
-    content: '';
+.card-thickness {
     position: absolute;
     top: 100%;
-    left: -5px;
-    right: -5px;
-    height: 20px;
-    background: #888; /* Solid gray for coin thickness */
-    border-radius: 20px;
-    transform: rotateX(90deg);
-    transform-origin: top;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    left: -10px;
+    right: -10px;
+    height: 30px;
+    background: #666;
+    border-radius: 15px;
+    box-shadow: 
+        0 0 20px rgba(0, 0, 0, 0.8),
+        inset 0 2px 0 rgba(255, 255, 255, 0.2),
+        inset 0 -2px 0 rgba(0, 0, 0, 0.3);
+    z-index: -1;
 }
 
 /* Flipped state */

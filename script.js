@@ -1,4 +1,4 @@
-console.log('Script loaded - version 5');
+console.log('Script loaded - version 6');
 
 const card = document.getElementById('card');
 let isFlipped = false;
