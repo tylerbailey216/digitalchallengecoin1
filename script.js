@@ -1,3 +1,5 @@
+console.log('Script loaded - version 3');
+
 const card = document.getElementById('card');
 let isFlipped = false;
 let startX = 0;
