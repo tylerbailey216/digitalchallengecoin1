@@ -64,7 +64,7 @@ card.addEventListener('touchmove', (e) => {
     // Calculate tilt based on touch position
     const deltaX = touchX - centerX;
     const deltaY = touchY - centerY;
-    const maxTilt = 10; // Reduced sensitivity
+    const maxTilt = 5; // Further reduced sensitivity
     tiltY = (deltaX / (rect.width / 2)) * maxTilt;
     tiltX = -(deltaY / (rect.height / 2)) * maxTilt;
 
@@ -74,10 +74,10 @@ card.addEventListener('touchmove', (e) => {
     const deltaTime = now - lastTime;
     lastTime = now;
 
-    if (Math.abs(deltaDragX) > Math.abs(deltaDragY) && Math.abs(deltaDragX) > 20) { // Increased threshold
+    if (Math.abs(deltaDragX) > Math.abs(deltaDragY) && Math.abs(deltaDragX) > 30) { // Higher threshold
         // Horizontal swipe for rotation
         velocity = deltaDragX / deltaTime;
-        currentRotation += deltaDragX * 0.2; // Reduced rotation speed
+        currentRotation += deltaDragX * 0.1; // Much slower rotation
     }
     updateCardTransform();
 });
