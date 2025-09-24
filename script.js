@@ -1,4 +1,4 @@
-console.log('Script loaded - version 3');
+console.log('Script loaded - version 4');
 
 const card = document.getElementById('card');
 let isFlipped = false;
@@ -63,12 +63,12 @@ card.addEventListener('touchmove', (e) => {
     const centerX = rect.left + rect.width / 2;
     const centerY = rect.top + rect.height / 2;
 
-    // Calculate tilt based on touch position
-    const deltaX = touchX - centerX;
-    const deltaY = touchY - centerY;
-    const maxTilt = 2; // Very low sensitivity
-    tiltY = (deltaX / (rect.width / 2)) * maxTilt;
-    tiltX = -(deltaY / (rect.height / 2)) * maxTilt;
+    // Disable tilt for touch - too sensitive on mobile
+    // const deltaX = touchX - centerX;
+    // const deltaY = touchY - centerY;
+    // const maxTilt = 2;
+    // tiltY = (deltaX / (rect.width / 2)) * maxTilt;
+    // tiltX = -(deltaY / (rect.height / 2)) * maxTilt;
 
     const deltaDragX = touchX - startX;
     const deltaDragY = touchY - startY;
@@ -76,10 +76,10 @@ card.addEventListener('touchmove', (e) => {
     const deltaTime = now - lastTime;
     lastTime = now;
 
-    if (Math.abs(deltaDragX) > Math.abs(deltaDragY) && Math.abs(deltaDragX) > 50) { // Very high threshold
+    if (Math.abs(deltaDragX) > Math.abs(deltaDragY) && Math.abs(deltaDragX) > 100) { // Very high threshold for mobile
         // Horizontal swipe for rotation
         velocity = deltaDragX / deltaTime;
-        currentRotation += deltaDragX * 0.05; // Very slow rotation
+        currentRotation += deltaDragX * 0.02; // Extremely slow rotation
     }
     updateCardTransform();
 });
