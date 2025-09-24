@@ -1,0 +1,138 @@
+body {
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+    overflow: auto;
+}
+
+.card-container {
+    perspective: 1000px;
+    width: 327px;
+    height: 512px;
+    margin: 20px auto;
+}
+
+.card {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.8s ease-out;
+    cursor: pointer;
+}
+
+.face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 
+        0 15px 35px rgba(0, 0, 0, 0.3),
+        0 5px 15px rgba(0, 0, 0, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+    border: 2px solid;
+    border-image: linear-gradient(45deg, #c0c0c0, #ffd700, #c0c0c0) 1;
+}
+
+.face img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.front {
+    transform: rotateY(0deg);
+}
+
+.back {
+    transform: rotateY(180deg);
+}
+
+/* Metallic holographic effect */
+.face::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        45deg,
+        rgba(255, 0, 150, 0.3) 0%,
+        rgba(0, 204, 255, 0.3) 25%,
+        rgba(255, 255, 0, 0.3) 50%,
+        rgba(255, 0, 150, 0.3) 75%,
+        rgba(0, 204, 255, 0.3) 100%
+    );
+    background-size: 400% 400%;
+    animation: hologram 4s ease-in-out infinite;
+    pointer-events: none;
+}
+
+@keyframes hologram {
+    0% { background-position: 0% 0%; }
+    25% { background-position: 100% 0%; }
+    50% { background-position: 100% 100%; }
+    75% { background-position: 0% 100%; }
+    100% { background-position: 0% 0%; }
+}
+
+/* Thickness effect */
+.card::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 5px;
+    right: 5px;
+    height: 15px;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.1));
+    border-radius: 0 0 15px 15px;
+    transform: rotateX(90deg);
+    transform-origin: top;
+    filter: blur(1px);
+}
+
+/* Flipped state */
+.card.flipped {
+    transform: rotateY(180deg);
+}
+
+/* Rotation for 360 view */
+.controls {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.controls button {
+    background: linear-gradient(135deg, #2c3e50, #34495e);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 0 10px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+.controls button:hover {
+    background: linear-gradient(135deg, #34495e, #2c3e50);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+}
+
+.controls button:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
